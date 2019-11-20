@@ -1,4 +1,4 @@
-package ru.iskra.peopl_cat_robot;
+package ru.iskra.peopl_cat_robot.athletes;
 
 import ru.iskra.peopl_cat_robot.interfaces.ActionJump;
 import ru.iskra.peopl_cat_robot.interfaces.ActionRun;
@@ -22,6 +22,11 @@ public class People implements BaseSport, ActionJump, ActionSwim, ActionRun {
     @Override
     public boolean isOnDistance() {
         return OnDistance;
+    }
+
+    @Override
+    public void setDisqualification() {
+        OnDistance = false;
     }
 
     @Override

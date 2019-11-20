@@ -1,4 +1,4 @@
-package ru.iskra.peopl_cat_robot;
+package ru.iskra.peopl_cat_robot.athletes;
 
 import ru.iskra.peopl_cat_robot.interfaces.BaseSport;
 
@@ -16,7 +16,7 @@ public class Robot implements BaseSport {
 
     @Override
     public String getName() {
-        return null;
+        return myName;
     }
 
     @Override
@@ -25,7 +25,10 @@ public class Robot implements BaseSport {
     }
 
     @Override
-    public void info() {
+    public void  setDisqualification() {
+    }
 
+    @Override
+    public void info() {
     }
 }

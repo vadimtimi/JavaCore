@@ -1,7 +1,8 @@
 package ru.iskra.peopl_cat_robot.interfaces;
 
 /**
- * Интерфейс со
+ * Интерфейс Соревнование
  */
-public interface Competitive {
+public interface Competition {
+    public void start(Object obj);
 }
