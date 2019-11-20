@@ -6,6 +6,7 @@
 
 package ru.iskra;
 import ru.iskra.*;
+import ru.iskra.enums.DayOfWeek;
 import ru.iskra.peopl_cat_robot.athletes.Calc;
 import ru.iskra.peopl_cat_robot.athletes.Cat;
 import ru.iskra.peopl_cat_robot.athletes.People;
@@ -47,12 +48,15 @@ public class Main {
     }
 
     public static void enums_test() {
-
+        System.out.println((DayOfWeek.THURSDAY.getWorkingHours() > 0) ?  "Работать " + DayOfWeek.THURSDAY.getWorkingHours() + " часов": "Выходной");
     }
 
     public static void main(String[] args) {
 	    // Начинаем проверять домашнее задание
+
+        System.out.println("**************");
         run_test_people_cat_robot();
+        System.out.println("**************");
         enums_test();
         // Домашнее задание закончено
         return;
