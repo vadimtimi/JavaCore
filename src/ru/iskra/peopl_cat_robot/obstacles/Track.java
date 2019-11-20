@@ -18,7 +18,7 @@ public class Track implements Competition {
             // Реализует ли Object базового спортсмена
             if(obj instanceof BaseSport){
                 ((BaseSport) obj).setDisqualification();
-                System.out.println(((BaseSport) obj).getName() + " Дисквалифицирован");
+                System.out.println(((BaseSport) obj).getName() + " Дисквалифицирован по бегу");
             }
         }
     }
