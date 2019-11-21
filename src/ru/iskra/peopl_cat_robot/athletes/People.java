@@ -9,10 +9,10 @@ public class People implements BaseSport, ActionJump, ActionSwim, ActionRun {
 
     private String myType= "unknown";
     private String myName = "unknown";
-    private int MaxJump = 0;
-    private int MaxRun = 0;
-    private int MaxSwim = 0;
-    private boolean OnDistance = false;
+    private int maxJump = 0;
+    private int maxRun = 0;
+    private int maxSwim = 0;
+    private boolean onDistance = false;
 
     @Override
     public String getName() {
@@ -21,17 +21,17 @@ public class People implements BaseSport, ActionJump, ActionSwim, ActionRun {
 
     @Override
     public boolean isOnDistance() {
-        return OnDistance;
+        return onDistance;
     }
 
     @Override
     public void setDisqualification() {
-        OnDistance = false;
+        onDistance = false;
     }
 
     @Override
     public void info() {
-        System.out.println(myType + " " + myName + " " + (OnDistance ? " на дистанции" : " выбыл из соревнований"));
+        System.out.println(myType + " " + myName + " " + (onDistance ? " на дистанции" : " выбыл из соревнований"));
     }
 
     public People() {
@@ -41,41 +41,41 @@ public class People implements BaseSport, ActionJump, ActionSwim, ActionRun {
     public People(String name_, int MaxJump_, int MaxRun_, int MaxSwim_) {
         this();
         myName = name_;
-        MaxJump = MaxJump_;
-        MaxRun = MaxRun_;
-        MaxSwim  = MaxSwim_;
+        maxJump = MaxJump_;
+        maxRun = MaxRun_;
+        maxSwim = MaxSwim_;
     }
 
     @Override
     public void jump(int distJump) {
         System.out.println(myName + " попытка прыгнуть");
-        if(distJump > MaxJump) {
-            OnDistance = false;
+        if(distJump > maxJump) {
+            onDistance = false;
         }
         else {
-            OnDistance = true;
+            onDistance = true;
         }
     }
 
     @Override
     public void run(int distRun) {
         System.out.println(myName + " попытка пробежать");
-        if(distRun > MaxRun) {
-            OnDistance = false;
+        if(distRun > maxRun) {
+            onDistance = false;
         }
         else {
-            OnDistance = true;
+            onDistance = true;
         }
     }
 
     @Override
     public void swim(int distSwim) {
         System.out.println(myName + " попытка проплыть");
-        if(distSwim > MaxSwim) {
-            OnDistance = false;
+        if(distSwim > maxSwim) {
+            onDistance = false;
         }
         else {
-            OnDistance = true;
+            onDistance = true;
         }
     }
 }

@@ -7,9 +7,9 @@ import ru.iskra.peopl_cat_robot.interfaces.BaseSport;
 public class Cat implements BaseSport , ActionJump, ActionRun {
     private String myType= "unknown";
     private String myName = "unknown";
-    private int MaxJump = 0;
-    private int MaxRun = 0;
-    private boolean OnDistance = false;
+    private int maxJump = 0;
+    private int maxRun = 0;
+    private boolean onDistance = false;
     public Cat() {
         myType = Thread.currentThread().getStackTrace()[1].getClassName().substring(Thread.currentThread().getStackTrace()[1].getClassName().lastIndexOf('.') + 1);
     }
@@ -17,8 +17,8 @@ public class Cat implements BaseSport , ActionJump, ActionRun {
     public Cat(String name_, int MaxJump_, int MaxRun_) {
         this();
         myName = name_;
-        MaxJump = MaxJump_;
-        MaxRun = MaxRun_;
+        maxJump = MaxJump_;
+        maxRun = MaxRun_;
     }
 
     @Override
@@ -28,38 +28,38 @@ public class Cat implements BaseSport , ActionJump, ActionRun {
 
     @Override
     public boolean isOnDistance() {
-        return OnDistance;
+        return onDistance;
     }
 
     @Override
     public void setDisqualification() {
-        OnDistance = false;
+        onDistance = false;
     }
 
     @Override
     public void info() {
-        System.out.println(myType + " " + myName + " " + (OnDistance ? " на дистанции" : " выбыл из соревнований"));
+        System.out.println(myType + " " + myName + " " + (onDistance ? " на дистанции" : " выбыл из соревнований"));
     }
 
     @Override
     public void jump(int distJump) {
         System.out.println(myName + " попытка прыгнуть");
-        if(distJump > MaxJump) {
-            OnDistance = false;
+        if(distJump > maxJump) {
+            onDistance = false;
         }
         else {
-            OnDistance = true;
+            onDistance = true;
         }
     }
 
     @Override
     public void run(int distRun) {
         System.out.println(myName + " попытка пробежать");
-        if(distRun > MaxRun) {
-            OnDistance = false;
+        if(distRun > maxRun) {
+            onDistance = false;
         }
         else {
-            OnDistance = true;
+            onDistance = true;
         }
     }
 }

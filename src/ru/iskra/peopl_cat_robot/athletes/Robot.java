@@ -6,8 +6,8 @@ import ru.iskra.peopl_cat_robot.interfaces.BaseSport;
 public class Robot implements BaseSport, ActionRun {
     private String myType= "unknown";
     private String myName = "unknown";
-    private int MaxRun = 0;
-    private boolean OnDistance = false;
+    private int maxRun = 0;
+    private boolean onDistance = false;
 
     public Robot() {
         myType = Thread.currentThread().getStackTrace()[1].getClassName().substring(Thread.currentThread().getStackTrace()[1].getClassName().lastIndexOf('.') + 1);
@@ -16,7 +16,7 @@ public class Robot implements BaseSport, ActionRun {
     public Robot(String name_, int MaxRun_ ) {
         this();
         myName = name_;
-        MaxRun = MaxRun;
+        maxRun = maxRun;
     }
 
     @Override
@@ -26,27 +26,27 @@ public class Robot implements BaseSport, ActionRun {
 
     @Override
     public boolean isOnDistance() {
-        return OnDistance;
+        return onDistance;
     }
 
     @Override
     public void  setDisqualification() {
-        OnDistance = false;
+        onDistance = false;
     }
 
     @Override
     public void info() {
-        System.out.println(myType + " " + myName + " " + (OnDistance ? " на дистанции" : " выбыл из соревнований"));
+        System.out.println(myType + " " + myName + " " + (onDistance ? " на дистанции" : " выбыл из соревнований"));
     }
 
     @Override
     public void run(int distRun) {
         System.out.println(myName + " попытка пробежать");
-        if(distRun > MaxRun) {
-            OnDistance = false;
+        if(distRun > maxRun) {
+            onDistance = false;
         }
         else {
-            OnDistance = true;
+            onDistance = true;
         }
     }
 }
