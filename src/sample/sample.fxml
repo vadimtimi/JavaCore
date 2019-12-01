@@ -5,12 +5,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
-        <Button fx:id="myButton" layoutX="477.0" layoutY="286.0" mnemonicParsing="false" onAction="#ClickOnSend" prefHeight="100.0" prefWidth="108.0" text="Отправить" />
+        <Button fx:id="myButton" layoutX="477.0" layoutY="286.0" mnemonicParsing="false" onAction="#ClickOnSend"  prefHeight="100.0" prefWidth="108.0" text="Отправить" />
         <AnchorPane layoutX="14.0" layoutY="286.0">
             <children>
-                <TextField fx:id="textArea" alignment="TOP_LEFT" prefHeight="101.0" prefWidth="450.0" />
+                <TextField fx:id="textArea" alignment="TOP_LEFT" prefHeight="101.0" prefWidth="450.0" onKeyPressed="#handleEnterPressed"/>
             </children>
         </AnchorPane>
-        <TextArea fx:id="textChat" editable="false" layoutX="15.0" layoutY="14.0" prefHeight="258.0" prefWidth="571.0" />
+        <TextArea fx:id="textChat" editable="false" layoutX="15.0" layoutY="14.0" prefHeight="258.0" prefWidth="571.0"  />
     </children>
 </AnchorPane>
