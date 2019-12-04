@@ -2,20 +2,40 @@ package ru.iskra;
 
 public class Main {
     static final int sizeArray = 10000000;
+    //static final int sizeArray = 10000000;
 
     public static void main(String[] args) {
-        long timeNoThread = noThread();
-        long timeYeshread = yesThread();
+        //
+        float[] arr1 = noThread();
+        //
+        float[] arr2 = yesThread();
 
-        System.out.println("Без потока: " + timeNoThread);
-        System.out.println("В потоке: " + timeYeshread);
+        try {
+            float[] arr3 =  multiThread(10);
+            // Сравнение массивов
+            for(int i = 0; i < sizeArray; i ++) {
+                if(arr1[i] != arr2[i]) {
+                    System.out.println("Массивы arr1 и arr2 не равны");
+                    break;
+                }
+            }
+            // Сравнение массивов
+            for(int i = 0; i < sizeArray; i ++) {
+                if(arr1[i] != arr3[i]) {
+                    System.out.println("Массивы arr1 и arr3 не равны");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Вычистение по формуле в основном потоке и заполнение массива
      * @return Возвращает время выполнения операции в миллисекундах
      */
-    private static long noThread() {
+    private static float[] noThread() {
         float[] arr = new float[sizeArray];
 
         for (int i = 0; i < arr.length; i++) {
@@ -30,10 +50,13 @@ public class Main {
 
         long timeEnd = System.currentTimeMillis();
 
-        return (timeEnd - timeStart);
+
+        System.out.println(("Без потоков: " + (timeEnd-timeStart)));
+
+        return arr;
     }
 
-    private static long yesThread() {
+    private static float[] yesThread() {
         float[] arr = new float[sizeArray];
 
         for (int i = 0; i < arr.length; i++) {
@@ -58,7 +81,7 @@ public class Main {
             public void run() //Этот метод будет выполняться в побочном потоке
             {
                 for (int i = 0; i < a1.length; i++) {
-                    a1[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                    a1[i] = (float)(a1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
                 }
             }
         });
@@ -69,7 +92,7 @@ public class Main {
             public void run() //Этот метод будет выполняться в побочном потоке
             {
                 for (int i = 0; i < a2.length; i++) {
-                    a2[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                    a2[i] = (float)(a2[i] * Math.sin(0.2f + (i+h) / 5) * Math.cos(0.2f + (i+h) / 5) * Math.cos(0.4f + (i+h) / 2));
                 }
             }
         });
@@ -88,6 +111,70 @@ public class Main {
 
         long timeEnd = System.currentTimeMillis();
 
-        return (timeEnd - timeStart);
+        System.out.println(("Два потока с копированием: " + (timeEnd-timeStart)));
+
+        return arr;
     }
+
+    private static float[] multiThread(int nThread) throws Exception {
+
+        if(( sizeArray % nThread ) != 0) {
+            throw new Exception("Нет возможности создать столько потоков.");
+        }
+        float[] arr = new float[sizeArray];
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = 1;
+        }
+
+        long timeStart = System.currentTimeMillis();
+
+        int h = sizeArray/nThread;
+        int[] startPos = new int[nThread];
+        for(int i= 0; i < nThread; i++) {
+            if(i == 0) {
+                startPos[i] = 0;
+            } else  {
+                startPos[i] = (i*h);
+            }
+        }
+
+        class MathThread extends Thread {
+            public int start_;
+
+            public MathThread(int start) {
+                this.start_ = start;
+            }
+        }
+
+        Thread[] threadsArray = new Thread[nThread];
+
+        for( int i= 0; i < nThread; i++) {
+            threadsArray[i] = new MathThread(i) {
+                public void run() {
+                    for(int j = 0; j < h; j++) {
+                        //System.out.println((this.start_* h) + j);
+                        int i = (this.start_* h) + j;
+                        arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                    }
+                }
+            };
+        }
+
+        for(int i = 0; i <nThread; i ++ ) {
+            threadsArray[i].start();
+        }
+
+        for(int i = 0; i <nThread; i ++ ) {
+            threadsArray[i].join();
+        }
+
+        long timeEnd = System.currentTimeMillis();
+
+        System.out.println(("Поток без копирования: " + (timeEnd-timeStart)));
+
+        return arr;
+    }
+
+
 }
